@@ -29,7 +29,7 @@ the Dockerfile generally should work with most Debian based base images.
 
 Just build the image:
 
-    docker build --tag python3:latest.
+    docker build --tag python3:latest .
 
 Use a different base image:
 
