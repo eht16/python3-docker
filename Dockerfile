@@ -15,8 +15,8 @@ ARG BASE_IMAGE_NAME=debian:buster-slim
 # Intermediate build container
 FROM $BASE_IMAGE_NAME AS builder
 
-ENV PYTHON_VERSION 3.8.1
-ENV PYTHON_PIP_VERSION 19.3.1
+ENV PYTHON_VERSION 3.8.3
+ENV PYTHON_PIP_VERSION 20.1.1
 
 ARG BASE_IMAGE_NAME
 RUN echo "Using base image \"${BASE_IMAGE_NAME}\" to build Python ${PYTHON_VERSION}"
@@ -29,7 +29,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV GPG_KEY E3FF2839C048B25C084DEBE9B26995E310250568
 # https://github.com/pypa/get-pip
 ENV PYTHON_GET_PIP_URL https://bootstrap.pypa.io/get-pip.py
-ENV PYTHON_GET_PIP_SHA256 b86f36cc4345ae87bfd4f10ef6b2dbfa7a872fbff70608a1e43944d283fd0eee
+ENV PYTHON_GET_PIP_SHA256 b3153ec0cf7b7bbf9556932aa37e4981c35dc2a2c501d70d91d2795aa532be79
 
 RUN set -ex && \
 	apt-get update && apt-get install --assume-yes --no-install-recommends \
