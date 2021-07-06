@@ -29,7 +29,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV GPG_KEY E3FF2839C048B25C084DEBE9B26995E310250568
 # https://github.com/pypa/get-pip
 ENV PYTHON_GET_PIP_URL https://bootstrap.pypa.io/get-pip.py
-ENV PYTHON_GET_PIP_SHA256 b3153ec0cf7b7bbf9556932aa37e4981c35dc2a2c501d70d91d2795aa532be79
+ENV PYTHON_GET_PIP_SHA256 6665659241292b2147b58922b9ffe11dda66b39d52d8a6f3aa310bc1d60ea6f7
 
 RUN set -ex && \
 	apt-get update && apt-get install --assume-yes --no-install-recommends \
@@ -55,7 +55,7 @@ RUN set -ex && \
 RUN wget --no-verbose --output-document=python.tar.xz "https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz" \
 	&& wget --no-verbose --output-document=python.tar.xz.asc "https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz.asc" \
 	&& export GNUPGHOME="$(mktemp -d)" \
-	&& gpg --batch --keyserver keyserver.ubuntu.com --recv-keys "$GPG_KEY" \
+	&& gpg --batch --keyserver keys.openpgp.org --recv-keys "$GPG_KEY" \
 	&& gpg --batch --verify python.tar.xz.asc python.tar.xz \
 	&& { command -v gpgconf > /dev/null && gpgconf --kill all || :; } \
 	&& rm -rf "$GNUPGHOME" python.tar.xz.asc \
