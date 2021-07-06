@@ -1,10 +1,11 @@
 # Python 3 image for Docker
 
+## NOTE: THIS IS A FORK THAT AIMS TO KEEP UP TO DATE WITH THE LATEST PYTHON/PIP, THE ORIGINAL ISN'T BEING MAINTAINED ANYMORE.
 
 ## About
 
 A slim Python 3 image for Docker.
-Currently the resulting image contains Python 3.8, compiled from source and
+Currently the resulting image contains Python 3.9, compiled from source and
 the `pip` and `wheel` packages are included.
 
 This is heavily inspired from the official Python image at
