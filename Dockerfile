@@ -15,20 +15,21 @@ ARG BASE_IMAGE_NAME=debian:buster-slim
 # Intermediate build container
 FROM $BASE_IMAGE_NAME AS builder
 
-ENV PYTHON_VERSION 3.9.6 \
-	PYTHON_PIP_VERSION 21.1.3
+ENV PYTHON_VERSION 3.9.6
+ENV PYTHON_PIP_VERSION 21.1.3
 
 ARG BASE_IMAGE_NAME
+RUN echo "Using base image \"${BASE_IMAGE_NAME}\" to build Python ${PYTHON_VERSION}"
 
 # http://bugs.python.org/issue19846
 # > At the moment, setting "LANG=C" on a Linux system *fundamentally breaks Python 3*, and that's not OK.
-ENV LANG C.UTF-8 \
- 	DEBIAN_FRONTEND=noninteractive
+ENV LANG C.UTF-8
+ENV DEBIAN_FRONTEND=noninteractive
 
-ENV GPG_KEY E3FF2839C048B25C084DEBE9B26995E310250568 \
+ENV GPG_KEY E3FF2839C048B25C084DEBE9B26995E310250568
 # https://github.com/pypa/get-pip
-	PYTHON_GET_PIP_URL https://bootstrap.pypa.io/get-pip.py \
- 	PYTHON_GET_PIP_SHA256 6665659241292b2147b58922b9ffe11dda66b39d52d8a6f3aa310bc1d60ea6f7
+ENV PYTHON_GET_PIP_URL https://bootstrap.pypa.io/get-pip.py
+ENV PYTHON_GET_PIP_SHA256 6665659241292b2147b58922b9ffe11dda66b39d52d8a6f3aa310bc1d60ea6f7
 
 RUN set -ex && \
 	apt-get update && apt-get install --assume-yes --no-install-recommends \
