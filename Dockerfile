@@ -3,7 +3,7 @@
 # This software may be modified and distributed under the terms
 # of the MIT license.  See the LICENSE file for details.
 #
-# Multistage Dockerfile to build a Python 3.8 image based on Debian Buster.
+# Multistage Dockerfile to build a Python 3.9 image based on Debian Buster.
 # Inspired by https://github.com/docker-library/python/blob/master/3.8/buster/slim/Dockerfile
 # Notable changes:
 # - adapted to multistage build
@@ -15,8 +15,8 @@ ARG BASE_IMAGE_NAME=debian:buster-slim
 # Intermediate build container
 FROM $BASE_IMAGE_NAME AS builder
 
-ENV PYTHON_VERSION 3.8.3
-ENV PYTHON_PIP_VERSION 20.1.1
+ENV PYTHON_VERSION 3.9.6
+ENV PYTHON_PIP_VERSION 21.1.3
 
 ARG BASE_IMAGE_NAME
 RUN echo "Using base image \"${BASE_IMAGE_NAME}\" to build Python ${PYTHON_VERSION}"
