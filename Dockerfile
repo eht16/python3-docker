@@ -78,11 +78,11 @@ RUN cd /usr/src/python \
 	&& make -j "$(nproc)" \
 	&& make install
 
-RUN strip /python/bin/python3.8 && \
-	strip --strip-unneeded /python/lib/python3.8/config-3.8-x86_64-linux-gnu/libpython3.8.a && \
-	strip --strip-unneeded /python/lib/python3.8/lib-dynload/*.so && \
-	rm /python/lib/libpython3.8.a && \
-	ln /python/lib/python3.8/config-3.8-x86_64-linux-gnu/libpython3.8.a /python/lib/libpython3.8.a
+RUN strip /python/bin/python3.9 && \
+	strip --strip-unneeded /python/lib/python3.9/config-3.9-x86_64-linux-gnu/libpython3.9.a && \
+	strip --strip-unneeded /python/lib/python3.9/lib-dynload/*.so && \
+	rm /python/lib/libpython3.9.a && \
+	ln /python/lib/python3.9/config-3.9-x86_64-linux-gnu/libpython3.9.a /python/lib/libpython3.9.a
 
 # install pip
 RUN set -ex; \
