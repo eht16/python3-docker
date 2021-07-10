@@ -1,7 +1,5 @@
 # Python 3 image for Docker
 
-## NOTE: THIS IS A FORK THAT AIMS TO KEEP UP TO DATE WITH THE LATEST PYTHON/PIP, THE ORIGINAL ISN'T BEING MAINTAINED ANYMORE.
-
 ## About
 
 A slim Python 3 image for Docker.

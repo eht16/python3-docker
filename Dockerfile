@@ -50,8 +50,7 @@ RUN set -ex && \
 		uuid-dev \
 		wget \
 		xz-utils \
-		zlib1g-dev && \
-		rm -rf /var/lib/apt/lists/*
+		zlib1g-dev
 
 RUN wget --no-verbose --output-document=python.tar.xz "https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz" \
 	&& wget --no-verbose --output-document=python.tar.xz.asc "https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz.asc" \
