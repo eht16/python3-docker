@@ -1,6 +1,8 @@
 name: Python3 Docker Image Test
+
 env:
   IMAGE_NAME: python3-docker-unittest:latest
+
 on:
   push:
     branches: [ $default-branch ]
@@ -21,12 +23,3 @@ jobs:
 
     - name: Run unittests
       run: python -m unittest discover --verbose --buffer --start-directory tests
-
-    - name: Run pyperformance tests
-      # the list of benchmarks to run is picked rather randomly to test different components
-      # of the interpreter and to not take too long to run
-      run: |
-        docker run --interactive --rm "${IMAGE_NAME}" bash <<EOF
-        pip install --no-input pyperformance
-        python -m pyperformance run --benchmarks 2to3,crypto_pyaes,django_template,html5lib,json_dumps,json_loads,python_startup,sqlalchemy_declarative,sqlalchemy_imperative,sqlite_synth
-        EOF
