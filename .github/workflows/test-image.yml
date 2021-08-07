@@ -1,0 +1,25 @@
+name: Python3 Docker Image Test
+
+env:
+  IMAGE_NAME: python3-docker-unittest:latest
+
+on:
+  push:
+    branches: [ $default-branch ]
+  pull_request:
+    branches: [ $default-branch ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Build the Docker image
+      run: docker build --build-arg BASE_IMAGE_NAME=debian:buster-slim --tag ${IMAGE_NAME} .
+
+    - name: Show image details
+      run: docker image ls "${IMAGE_NAME}"
+
+    - name: Run unittests
+      run: python -m unittest discover --verbose --buffer --start-directory tests
