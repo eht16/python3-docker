@@ -23,6 +23,11 @@ as build argument.
 Tested with `debian:buster-slim`, `debian:buster-slim` and `ubuntu:18.04`,
 the Dockerfile generally should work with most Debian based base images.
 
+### Motivation
+
+- Be able to specify a custom base image
+- Have a Python Docker image as small as possible while still usable for most use cases
+
 
 ## Build
 
