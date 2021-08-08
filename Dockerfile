@@ -17,7 +17,7 @@ FROM $BASE_IMAGE_NAME AS builder
 
 # Set Python and Pip versions
 ENV PYTHON_VERSION=3.9.6
-ENV PYTHON_PIP_VERSION=21.2.1
+ENV PYTHON_PIP_VERSION=21.2.3
 
 ARG BASE_IMAGE_NAME
 RUN echo "Using base image \"${BASE_IMAGE_NAME}\" to build Python ${PYTHON_VERSION}"
