@@ -24,8 +24,8 @@ RUN echo "Using base image \"${BASE_IMAGE_NAME}\" to build Python ${PYTHON_VERSI
 
 # http://bugs.python.org/issue19846
 # > At the moment, setting "LANG=C" on a Linux system *fundamentally breaks Python 3*, and that's not OK.
-ENV LANG=C.UTF-8 \
-	DEBIAN_FRONTEND=noninteractive
+ENV LANG=C.UTF-8
+ENV DEBIAN_FRONTEND=noninteractive
 
 ENV GPG_KEY=E3FF2839C048B25C084DEBE9B26995E310250568
 	# https://github.com/pypa/get-pip
