@@ -14,10 +14,10 @@ class PythonDockerImageTestCase(unittest.TestCase):
         cls._pip_version = None
         with open('Dockerfile') as docker_file:
             for line in docker_file:
-                if line.startswith('ENV PYTHON_VERSION '):
-                    cls._python_version = line.split()[2]
-                elif line.startswith('ENV PYTHON_PIP_VERSION '):
-                    cls._pip_version = line.split()[2]
+                if line.startswith('ENV PYTHON_VERSION='):
+                    cls._python_version = line.split('=')[1].strip()
+                elif line.startswith('ENV PYTHON_PIP_VERSION='):
+                    cls._pip_version = line.split('=')[1].strip()
 
     def _run_command_in_image(self, *command, code=None):
         input_ = code.encode('utf-8') if code is not None else None
