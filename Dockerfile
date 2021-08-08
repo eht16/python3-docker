@@ -29,7 +29,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 ENV GPG_KEY=E3FF2839C048B25C084DEBE9B26995E310250568
 	# https://github.com/pypa/get-pip
-ENV PYTHON_GET_PIP_URL=https://bootstrap.pypa.io/get-pip.py
+ENV PYTHON_GET_PIP_URL https://raw.githubusercontent.com/pypa/get-pip/${PYTHON_PIP_VERSION}/public/get-pip.py
 ENV PYTHON_GET_PIP_SHA256=fa6f3fb93cce234cd4e8dd2beb54a51ab9c247653b52855a48dd44e6b21ff28b
 
 # Install build dependencies
