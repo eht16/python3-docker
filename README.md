@@ -7,7 +7,7 @@ Currently the resulting image contains Python 3.9, compiled from source and
 the `pip` and `wheel` packages are included.
 
 This is heavily inspired from the official Python image at
-https://github.com/docker-library/python/blob/master/3.8/buster/slim/Dockerfile
+https://github.com/docker-library/python/blob/master/3.9/buster/slim/Dockerfile
 but has a few differences:
 
   - use multi-stage build in Dockerfile to ease the build step and still get

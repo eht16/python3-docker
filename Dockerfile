@@ -19,6 +19,11 @@ FROM $BASE_IMAGE_NAME AS builder
 ENV PYTHON_VERSION=3.9.6
 ENV PYTHON_PIP_VERSION=21.2.3
 
+ENV GPG_KEY=E3FF2839C048B25C084DEBE9B26995E310250568
+# https://github.com/pypa/get-pip
+ENV PYTHON_GET_PIP_URL https://raw.githubusercontent.com/pypa/get-pip/${PYTHON_PIP_VERSION}/public/get-pip.py
+ENV PYTHON_GET_PIP_SHA256=fa6f3fb93cce234cd4e8dd2beb54a51ab9c247653b52855a48dd44e6b21ff28b
+
 ARG BASE_IMAGE_NAME
 RUN echo "Using base image \"${BASE_IMAGE_NAME}\" to build Python ${PYTHON_VERSION}"
 
@@ -26,11 +31,6 @@ RUN echo "Using base image \"${BASE_IMAGE_NAME}\" to build Python ${PYTHON_VERSI
 # > At the moment, setting "LANG=C" on a Linux system *fundamentally breaks Python 3*, and that's not OK.
 ENV LANG=C.UTF-8
 ENV DEBIAN_FRONTEND=noninteractive
-
-ENV GPG_KEY=E3FF2839C048B25C084DEBE9B26995E310250568
-	# https://github.com/pypa/get-pip
-ENV PYTHON_GET_PIP_URL https://raw.githubusercontent.com/pypa/get-pip/${PYTHON_PIP_VERSION}/public/get-pip.py
-ENV PYTHON_GET_PIP_SHA256=fa6f3fb93cce234cd4e8dd2beb54a51ab9c247653b52855a48dd44e6b21ff28b
 
 # Install build dependencies
 RUN set -ex && \
@@ -69,7 +69,6 @@ RUN wget --no-verbose --output-document=python.tar.xz "https://www.python.org/ft
 # Compile Python source
 RUN cd /usr/src/python \
 	&& gnuArch="$(dpkg-architecture --query DEB_BUILD_GNU_TYPE)" \
-	&& ./configure --help \
 	&& ./configure \
 		--build="$gnuArch" \
 		--prefix="/python" \
@@ -78,16 +77,10 @@ RUN cd /usr/src/python \
 		--enable-ipv6 \
 		--disable-shared \
 		--with-system-expat \
+		--with-system-ffi \
 		--without-ensurepip \
-	&& make -j "$(nproc)" \
+	&& make -j "$(nproc)" LDFLAGS="-Wl,--strip-all" \
 	&& make install
-
-# Strip binaries to reduce size
-RUN strip /python/bin/python3.9 && \
-	strip --strip-unneeded /python/lib/python3.9/config-3.9-x86_64-linux-gnu/libpython3.9.a && \
-	strip --strip-unneeded /python/lib/python3.9/lib-dynload/*.so && \
-	rm /python/lib/libpython3.9.a && \
-	ln /python/lib/python3.9/config-3.9-x86_64-linux-gnu/libpython3.9.a /python/lib/libpython3.9.a
 
 # Install pip
 RUN set -ex; \
@@ -102,13 +95,22 @@ RUN set -ex; \
 
 # Remove unecessary libraries
 RUN find /python/lib -type d -a \( \
+		-name __pycache__ -o \
 		-name test -o \
 		-name tests -o \
 		-name idlelib -o \
+		-name idle_test -o \
 		-name turtledemo -o \
 		-name pydoc_data -o \
-		-name tkinter \) -exec rm -rf {} +
+		-name tkinter \) \
+		-exec rm -rf '{}' +
 
+RUN find /python/lib -type f -a \( \
+		-name '*.a' -o \
+		-name '*.pyc' -o \
+		-name '*.pyo' -o \
+		-name '*.exe' \) \
+		-exec rm '{}' +
 
 # App container
 FROM $BASE_IMAGE_NAME AS app
