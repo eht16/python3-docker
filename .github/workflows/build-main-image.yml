@@ -34,4 +34,4 @@ jobs:
           platforms: linux/386,linux/amd64,linux/arm/v7,linux/arm64,linux/ppc64le
           push: true
           tags: |
-            ${{ secrets.DOCKER_USERNAME }}/eht16-python3:
+            ${{ secrets.DOCKER_USERNAME }}/eht16-python3:buster-slim
