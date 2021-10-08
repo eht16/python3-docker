@@ -16,7 +16,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Build the Docker image
-      run: docker build --build-arg BASE_IMAGE_NAME=debian:buster-slim --tag ${IMAGE_NAME} .
+      run: docker build --build-arg BASE_IMAGE_NAME=debian:bullseye-slim --tag ${IMAGE_NAME} .
 
     - name: Show image details
       run: docker image ls "${IMAGE_NAME}"

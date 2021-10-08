@@ -17,10 +17,10 @@ but has a few differences:
     these modules
   - the Python interpreter is installed to /python
 
-The Dockerfile uses `debian:buster-slim` (https://hub.docker.com/_/debian/)
+The Dockerfile uses `debian:bullseye-slim` (https://hub.docker.com/_/debian/)
 as base but this is configurable at build time using `BASE_IMAGE_NAME`
 as build argument.
-Tested with `debian:buster-slim`, `debian:buster-slim` and `ubuntu:18.04`,
+Tested with `debian:buster-slim`, `debian:bullseye-slim` and `ubuntu:18.04`,
 the Dockerfile generally should work with most Debian based base images.
 
 ### Motivation

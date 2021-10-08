@@ -10,7 +10,7 @@
 # - removed cleanup steps in builder image for readibility
 # - build without tk, ncurses and readline
 
-ARG BASE_IMAGE_NAME=debian:buster-slim
+ARG BASE_IMAGE_NAME=debian:bullseye-slim
 
 # Intermediate build container
 FROM $BASE_IMAGE_NAME AS builder
