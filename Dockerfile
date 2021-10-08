@@ -3,7 +3,7 @@
 # This software may be modified and distributed under the terms
 # of the MIT license.  See the LICENSE file for details.
 #
-# Multistage Dockerfile to build a Python 3.9 image based on Debian Buster.
+# Multistage Dockerfile to build a Python 3.10 image based on Debian Buster.
 # Inspired by https://github.com/docker-library/python/blob/master/3.9/buster/slim/Dockerfile
 # Notable changes:
 # - adapted to multistage build
@@ -16,13 +16,13 @@ ARG BASE_IMAGE_NAME=debian:buster-slim
 FROM $BASE_IMAGE_NAME AS builder
 
 # Set Python and Pip versions
-ENV PYTHON_VERSION=3.9.7
-ENV PYTHON_PIP_VERSION=21.2.3
+ENV PYTHON_VERSION=3.10.0
+ENV PYTHON_PIP_VERSION=21.2.4
 
-ENV GPG_KEY=E3FF2839C048B25C084DEBE9B26995E310250568
+ENV GPG_KEY=A035C8C19219BA821ECEA86B64E628F8D684696D
 # https://github.com/pypa/get-pip
 ENV PYTHON_GET_PIP_URL https://raw.githubusercontent.com/pypa/get-pip/${PYTHON_PIP_VERSION}/public/get-pip.py
-ENV PYTHON_GET_PIP_SHA256=fa6f3fb93cce234cd4e8dd2beb54a51ab9c247653b52855a48dd44e6b21ff28b
+ENV PYTHON_GET_PIP_SHA256=01249aa3e58ffb3e1686b7141b4e9aac4d398ef4ac3012ed9dff8dd9f685ffe0
 
 ARG BASE_IMAGE_NAME
 RUN echo "Using base image \"${BASE_IMAGE_NAME}\" to build Python ${PYTHON_VERSION}"
@@ -33,7 +33,7 @@ ENV LANG=C.UTF-8
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Install build dependencies
-RUN set -ex && \
+RUN set -e && \
 	apt-get update && apt-get install --assume-yes --no-install-recommends \
 		ca-certificates \
 		dirmngr \

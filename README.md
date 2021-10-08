@@ -3,7 +3,7 @@
 ## About
 
 A slim Python 3 image for Docker.
-Currently the resulting image contains Python 3.9, compiled from source and
+Currently the resulting image contains Python 3.10, compiled from source and
 the `pip` and `wheel` packages are included.
 
 This is heavily inspired from the official Python image at
